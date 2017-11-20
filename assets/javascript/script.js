@@ -11,7 +11,7 @@ $("#header").html("<p>Here are the airlines from the topcs array:</p><br>"+topic
 displayTopics();
 function displayTopics(){
 	for (i=0;i<topics.length;i++){
-		$("#tabs").append("<button id=topic"+i+">"+topics[i]+"</button>");
+		$("#tabs").append("<button id='topicindex"+i+"' value='"+topics[i]+"'>"+topics[i]+"</button>");
 		console.log("appended topics index: "+i);
 	}
 }
@@ -29,3 +29,56 @@ function displayTopics(){
 
 
 // 6. Add a form to your page takes the value from a user input box and adds it into your `topics` array. Then make a function call that takes each topic in the array remakes the buttons on the page.
+
+
+
+
+    $("button").on("click", function() {
+		// Grabbing and storing the data-animal property value from the button
+		console.log(this);
+		var topic = $(this).attr("value");
+		console.log(topic);
+		// clears previous query
+		$("#output").html("");
+		
+		// Constructing a queryURL using the animal name
+		var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topic + "&api_key=dc6zaTOxFJmzC&limit=10";
+
+      	// Performing an AJAX request with the queryURL
+      	$.ajax({
+          	url: queryURL,
+          	method: "GET"
+        })
+
+	    // After data comes back from the request
+	    .done(function(response) {
+		   	console.log(queryURL);
+
+		    console.log(response);
+		      // storing the data from the AJAX request in the results variable
+		    var results = response.data;
+
+		      // Looping through each result item
+		    for (var i = 0; i < 10; i++) {
+
+		        // Creating and storing a div tag
+			    var topicDiv = $("<div>");
+
+			        // Creating a paragraph tag with the result item's rating
+			    var p = $("<p>").text("Rating: " + results[i].rating);
+
+			        // Creating and storing an image tag
+			    var topicImage = $("<img>");
+
+			        // Setting the src attribute of the image to a property pulled off the result item
+			    topicImage.attr("src", results[i].images.fixed_height.url);
+
+			        // Appending the paragraph and image tag to the topicDiv
+			    topicDiv.append(p);
+			    topicDiv.append(topicImage);
+
+			        // Prependng the topicDiv to the HTML page in the "#gifs-appear-here" div
+			    $("#output").prepend(topicDiv);
+	      	}
+	    });
+    });
