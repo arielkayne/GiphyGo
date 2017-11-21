@@ -14,7 +14,7 @@ function displayTopics(){
 		$("#tabs").append("<button id='topicindex'"+i+" value='"+topics[i]+"''>"+topics[i]+"</button>");
 		console.log("appended topics index: "+i);
 	}
-}
+
 
 
 // 3. When the user clicks on a button, the page should grab 10 static, non-animated gif images from the GIPHY API and place them on the page. 
@@ -93,19 +93,21 @@ $("button").on("click", function() {
 	        event.preventDefault();
 
 	        // Here we grab the text from the input box
-	        var newAdd = $("#addInput").val();
+	        var newAdd = $("#addInput").val().trim();
 
-	        // Here we add to array
-	        topics.push(newAdd);
-	        console.log(topics);
+	        if (newAdd!=="") {
+		        // Here we add to array
+		        topics.push(newAdd);
+		        console.log(topics);
 
-	        // here we clear the input
-	        $("#addInput").val("");
+		        // here we clear the input
+		        $("#addInput").val("");
 
-	        //reload the tabs
-	        displayTopics();
+		        //reload the tabs
+		        displayTopics();
+	    	}
 		});
-
+}
 
 
 // 6. Add a form to your page takes the value from a user input box and adds it into your `topics` array. 
