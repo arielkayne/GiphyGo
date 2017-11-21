@@ -1,3 +1,6 @@
+body {
+	margin-left:20px;
+}
 img {
 	max-width: 200px;
 	max-height: 200px;
@@ -6,4 +9,5 @@ img {
 
 p {
 	font-weight: bolder;
+	margin:20px;
 }
