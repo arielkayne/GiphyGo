@@ -9,6 +9,7 @@ var topics=["football","soccer","equestrian","lacrosse","tennis","track & field"
 
 displayTopics();
 function displayTopics(){
+	$("#tabs").html("");
 	for (i=0;i<topics.length;i++){
 		$("#tabs").append("<button id='topicindex'"+i+" value='"+topics[i]+"''>"+topics[i]+"</button>");
 		console.log("appended topics index: "+i);
@@ -84,6 +85,28 @@ $("button").on("click", function() {
     	});
     });
 });
+
+    	$("#addItem").on("click", function(event) {
+
+	        // event.preventDefault() can be used to prevent an event's default behavior.
+	        // Here, it prevents the submit button from trying to submit a form when clicked
+	        event.preventDefault();
+
+	        // Here we grab the text from the input box
+	        var newAdd = $("#addInput").val();
+
+	        // Here we add to array
+	        topics.push(newAdd);
+	        console.log(topics);
+
+	        // here we clear the input
+	        $("#addInput").val("");
+
+	        //reload the tabs
+	        displayTopics();
+		});
+
+
 
 // 6. Add a form to your page takes the value from a user input box and adds it into your `topics` array. 
 // Then make a function call that takes each topic in the array remakes the buttons on the page.
