@@ -37,7 +37,6 @@ $("button").on("click", function() {
     // After data comes back from the request
     .done(function(response) {
 	   	console.log(queryURL);
-
 	    console.log(response);
 	      // storing the data from the AJAX request in the results variable
 	    var results = response.data;
@@ -49,10 +48,11 @@ $("button").on("click", function() {
 		    var topicDiv = $("<div>");
 
 		        // Creating a paragraph tag with the result item's rating
-		    var p = $("<p>").text("Rating: " + results[i].rating);
+		    var p = $("<p>").html("Rating: " + results[i].rating + "<br><br>");
 
 		        // Creating and storing an image tag
 		    var topicImage = $("<img>");
+
 
 		        // Setting the src attribute of the image to a property pulled off the result item
 		    topicImage.attr({
@@ -66,7 +66,7 @@ $("button").on("click", function() {
 		    topicDiv.append(topicImage);
 		    topicDiv.append(p);
 
-		        // Prependng the topicDiv to the HTML page in the "#gifs-appear-here" div
+		        // Prependng the topicDiv to the HTML page in the "#output" div
 		    $("#output").prepend(topicDiv);
       	}
 
@@ -76,22 +76,16 @@ $("button").on("click", function() {
     		var e=this.alt;
     		var f=this.id;
     		var g=this.src;
-    		var h=this.id;
     		console.log(e);
     		console.log(f);
     		console.log(g);
     		this.src=e;
-    		var e, f, g=null;
-
+    		this.alt=g;
     	});
     });
 });
 
+// 6. Add a form to your page takes the value from a user input box and adds it into your `topics` array. 
+// Then make a function call that takes each topic in the array remakes the buttons on the page.
 
 
-// 5. Under every gif, display its rating (PG, G, so on). 
-//    * This data is provided by the GIPHY API.
-//    * Only once you get images displaying with button presses should you move on to the next step.
-
-
-// 6. Add a form to your page takes the value from a user input box and adds it into your `topics` array. Then make a function call that takes each topic in the array remakes the buttons on the page.
